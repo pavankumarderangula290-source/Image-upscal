@@ -1,339 +1,326 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMO Natural Engine Image Upscaler Workspace</title>
-    <!-- Tailwind CSS Engine for interface layout -->
+    <title>Photonic Engine Image Processing Workspace</title>
+    <!-- Tailwind CSS for high-fidelity minimalist layout -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        .loader {
-            border-top-color: #10b981;
-            animation: spinner 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .spinner {
+            border-top-color: #ffffff;
+            animation: spin 1s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
         }
-        @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen antialiased">
 
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <!-- Main Top Bar Layout Header -->
+        <!-- Apple-Inspired Workspace Header -->
         <header class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full mb-3">
-                ✨ Powered by LUMO/DetailMax Matrix Architecture
-            </div>
-            <h1 class="text-4xl font-black text-white tracking-tight mb-2">
-                LUMO True-Natural Upscaler
+            <h1 class="text-3xl font-semibold tracking-tight text-white mb-2">
+                Photonic Engine Studio
             </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
-                Upscale textures natively to 16K Extreme-HD while neutralizing over-processed computational noise and maintaining accurate human-eye color spaces.
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm">
+                Deep Fusion multi-scale reconstruction. Processes raw spatial textures up to 16K resolution without artificial edge halos.
             </p>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Side Control Console Deck Panel -->
-            <div class="bg-slate-900 p-6 rounded-2xl shadow-2xl border border-slate-800/80 h-fit">
-                <h2 class="text-lg font-bold text-white mb-5 flex items-center gap-2 border-b border-slate-800 pb-3">
-                    <span>⚡</span> Matrix Parameters
-                </h2>
-
-                <!-- Image Upload Zone Interactivity -->
-                <div class="mb-6">
-                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Source Image File</label>
-                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-700 border-dashed rounded-xl cursor-pointer bg-slate-900/50 hover:bg-slate-800/60 hover:border-emerald-500/50 transition-all">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
-                            <span class="text-2xl mb-1 text-slate-400">📸</span>
-                            <p class="text-xs text-slate-200 font-semibold" id="file-title">Load Target Matrix File</p>
-                            <p class="text-[10px] text-slate-500 mt-1" id="file-info">Accepts PNG, JPEG, WebP assets</p>
+            <!-- Sidebar: Computational Controls -->
+            <div class="bg-zinc-900 p-6 rounded-3xl border border-zinc-800 shadow-2xl h-fit space-y-6">
+                
+                <!-- Image Drop Ingestion File Target -->
+                <div>
+                    <h2 class="text-xs font-medium text-zinc-400 uppercase tracking-widest mb-3">Camera Asset Source</h2>
+                    <label class="group flex flex-col items-center justify-center w-full h-28 border border-zinc-700 rounded-2xl cursor-pointer bg-zinc-900 hover:bg-zinc-850 hover:border-zinc-500 transition-all">
+                        <div class="text-center px-4">
+                            <span class="text-xl block mb-1 group-hover:scale-105 transition-transform">📷</span>
+                            <p class="text-xs text-zinc-300 font-medium" id="upload-label">Import Image Asset</p>
                         </div>
-                        <input type="file" id="image-input" class="hidden" accept="image/*" />
+                        <input type="file" id="asset-file-input" class="hidden" accept="image/*" />
                     </label>
                 </div>
 
-                <!-- Processing Configuration Select Dropdowns -->
-                <div class="mb-5">
-                    <label for="target-scale" class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Resolution Output Ceiling</label>
-                    <select id="target-scale" class="w-full bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none p-2.5">
-                        <option value="4k">4K Ultra-HD (3840 x 2160)</option>
-                        <option value="8k">8K Ultra-HD (7680 x 4320)</option>
-                        <option value="16k" selected>16K Extreme-HD (15360 x 8640)</option>
+                <!-- Resolution Targets Spatial Profile Selector -->
+                <div>
+                    <label for="resolution-tier" class="block text-xs font-medium text-zinc-400 uppercase tracking-widest mb-2">Output Format Profile</label>
+                    <select id="resolution-tier" class="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 text-sm rounded-xl focus:ring-1 focus:ring-white focus:outline-none p-2.5">
+                        <option value="4k">4K Resolution (3840 x 2160)</option>
+                        <option value="8k">8K High-Fidelity (7680 x 4320)</option>
+                        <option value="16k" selected>16K Photonic Max (15360 x 8640)</option>
                     </select>
                 </div>
 
-                <!-- Core Algorithm Selection Pipeline (Crucial Feature Requested) -->
-                <div class="mb-6 bg-slate-950 p-4 rounded-xl border border-slate-800/60">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">LUMO Image Engine</label>
-                        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-1.5 py-0.5 rounded font-mono">ACTIVE</span>
+                <!-- Photographic Styles Custom Segment Integration Matrix -->
+                <div>
+                    <label class="block text-xs font-medium text-zinc-400 uppercase tracking-widest mb-2">Photographic Style</label>
+                    <div class="grid grid-cols-2 gap-2" id="style-selector-matrix">
+                        <button data-style="standard" class="style-btn active px-3 py-2 bg-white text-black font-medium text-xs rounded-xl transition-all border border-transparent">Standard</button>
+                        <button data-style="rich-contrast" class="style-btn px-3 py-2 bg-zinc-800 text-zinc-300 text-xs rounded-xl transition-all border border-zinc-700 hover:border-zinc-500">Rich Contrast</button>
+                        <button data-style="vibrant" class="style-btn px-3 py-2 bg-zinc-800 text-zinc-300 text-xs rounded-xl transition-all border border-zinc-700 hover:border-zinc-500">Vibrant</button>
+                        <button data-style="warm" class="style-btn px-3 py-2 bg-zinc-800 text-zinc-300 text-xs rounded-xl transition-all border border-zinc-700 hover:border-zinc-500">Warm</button>
                     </div>
-                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">
-                        Maintains uncompressed 16-bit photon arrays to eliminate edge artifact clipping across all faces, scenery backgrounds, and shapes.
+                </div>
+
+                <!-- Engine Sub-system Options Toggles -->
+                <div class="p-4 bg-zinc-950 rounded-2xl border border-zinc-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-zinc-200">Deep Fusion Engine</span>
+                        <span class="text-[10px] bg-zinc-800 text-zinc-400 font-mono px-1.5 py-0.5 rounded">Enabled</span>
+                    </div>
+                    <p class="text-[11px] text-zinc-500 leading-normal">
+                        Performs pixel-by-pixel low-light structural matching to resolve crisp real textures without introducing edge artifacts.
                     </p>
-                    <div class="flex items-center gap-3">
-                        <input type="checkbox" id="lumo-toggle" checked class="w-4 h-4 text-emerald-500 bg-slate-800 border-slate-700 rounded-sm focus:ring-emerald-500 focus:ring-2">
-                        <label for="lumo-toggle" class="text-xs text-slate-200 font-medium cursor-pointer selection:bg-transparent">
-                            Enable Eye-Perception Balancing
-                        </label>
+                    <div class="flex items-center gap-2 pt-1">
+                        <input type="checkbox" id="deep-fusion-toggle" checked class="w-4 h-4 rounded border-zinc-700 text-zinc-900 focus:ring-0 accent-white">
+                        <label for="deep-fusion-toggle" class="text-xs text-zinc-300 cursor-pointer select-none">Bypass Tone Compression</label>
                     </div>
                 </div>
 
-                <!-- Fine Tuning Adjustments Sliders -->
-                <div class="mb-5">
-                    <div class="flex justify-between text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">
-                        <label for="tonality">True Tone Contrast</label>
-                        <span id="tonality-val" class="text-slate-300">Natural</span>
-                    </div>
-                    <input type="range" id="tonality" min="0" max="30" value="12" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
-                </div>
-
-                <div class="mb-6">
-                    <div class="flex justify-between text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">
-                        <label for="clarity">Spatial Edge Clarity</label>
-                        <span id="clarity-val" class="text-slate-300">Balanced</span>
-                    </div>
-                    <input type="range" id="clarity" min="0" max="40" value="15" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
-                </div>
-
-                <!-- Processing Execution Control Buttons -->
-                <button id="execute-btn" disabled class="w-full bg-slate-800 text-slate-500 font-bold py-3 px-4 rounded-xl font-mono tracking-wide text-xs uppercase cursor-not-allowed transition-all flex justify-center items-center gap-2">
-                    <span>🧬</span> Initialize Upscale Matrix
+                <!-- Computational Processing Execution Trigger -->
+                <button id="process-trigger" disabled class="w-full bg-zinc-800 text-zinc-600 font-medium py-3 px-4 rounded-2xl text-xs uppercase tracking-wider cursor-not-allowed transition-all flex justify-center items-center gap-2">
+                    <span>⚡</span> Process Photonic Frame
                 </button>
             </div>
 
-            <!-- Right Workspace Stream Display Panel -->
+            <!-- Main Render Stream Canvas Presentation Space View -->
             <div class="lg:col-span-2 flex flex-col gap-4">
-                <div class="bg-slate-900 p-4 rounded-2xl shadow-2xl border border-slate-800/80 flex-1 flex flex-col min-h-[420px] justify-center items-center relative overflow-hidden">
+                <div class="bg-zinc-900 p-4 rounded-3xl border border-zinc-800 shadow-2xl flex-1 flex flex-col min-h-[440px] justify-center items-center relative overflow-hidden">
                     
-                    <!-- Null State Layout Display -->
-                    <div id="preview-placeholder" class="text-center text-slate-600 max-w-sm">
-                        <span class="text-5xl block mb-3 opacity-40">🎚️</span>
-                        <p class="text-sm font-medium text-slate-400 mb-1">Workspace Pipeline Empty</p>
-                        <p class="text-xs text-slate-500">Feed a graphic asset into the control panel deck to engage the photon rendering system engine.</p>
+                    <!-- Base Ingestion Placeholder Prompt -->
+                    <div id="null-state" class="text-center text-zinc-600 max-w-xs">
+                        <span class="text-4xl block mb-2 opacity-50">📸</span>
+                        <p class="text-xs font-medium text-zinc-400">Studio Calibration Pipeline Empty</p>
+                        <p class="text-[11px] text-zinc-500 mt-1">Load an image asset target into the dashboard engine to configure the multi-scale Neural pipeline parameters.</p>
                     </div>
 
-                    <!-- Render Container Output Preview Layout -->
-                    <div id="preview-container" class="hidden w-full h-full flex flex-col justify-between items-center gap-4">
-                        <div class="relative max-h-[460px] overflow-auto border border-slate-800 rounded-xl bg-slate-950 flex items-center justify-center p-2 w-full group">
-                            <img id="image-preview" class="max-w-full max-h-[420px] object-contain shadow-2xl transition-all duration-300" alt="Workspace active render pipeline display" />
+                    <!-- Operational Display Output Layout Preview Screen -->
+                    <div id="render-preview-wrapper" class="hidden w-full h-full flex flex-col justify-between items-center gap-4">
+                        <div class="relative max-h-[460px] overflow-auto border border-zinc-800 rounded-2xl bg-zinc-950 flex items-center justify-center p-2 w-full">
+                            <img id="render-output-preview" class="max-w-full max-h-[400px] object-contain shadow-2xl transition-all duration-300" alt="Photonic core live display stream output" />
                         </div>
-                        <div class="w-full text-center font-mono text-[11px] text-slate-400 bg-slate-950 p-2 rounded-lg border border-slate-800/50" id="dimension-readout">
-                            VRAM Allocation Target: 0 x 0
+                        <div class="w-full text-center font-mono text-[10px] text-zinc-500" id="readout-metrics-panel">
+                            Target Frame Parameters: Unallocated
                         </div>
                     </div>
 
-                    <!-- Processing Engine Overlay HUD -->
-                    <div id="loading-overlay" class="hidden absolute inset-0 bg-slate-950/95 flex flex-col items-center justify-center p-6 animate-fade-in">
-                        <div class="loader ease-linear rounded-full border-4 border-t-4 border-slate-800 h-14 w-14 mb-4"></div>
-                        <h3 class="text-base font-mono uppercase tracking-wider text-white mb-2" id="status-heading">Awaiting Execution...</h3>
-                        <div class="w-64 bg-slate-800 rounded-full h-1 mb-4 overflow-hidden">
-                            <div id="progress-bar" class="bg-emerald-500 h-1 w-0 transition-all duration-500 ease-out"></div>
+                    <!-- Neural Pipeline Execution HUD Overlay -->
+                    <div id="engine-loader-overlay" class="hidden absolute inset-0 bg-zinc-950/95 flex flex-col items-center justify-center p-6">
+                        <div class="spinner rounded-full border-2 border-zinc-800 h-12 w-12 mb-4"></div>
+                        <h3 class="text-xs font-medium tracking-widest uppercase text-white mb-2" id="engine-status-header">Initializing Core...</h3>
+                        <div class="w-56 bg-zinc-800 rounded-full h-[2px] mb-3 overflow-hidden">
+                            <div id="engine-progress-indicator" class="bg-white h-[2px] w-0 transition-all duration-300"></div>
                         </div>
-                        <div id="status-log" class="text-[10px] font-mono text-slate-500 max-w-xs text-center h-10">
-                            Pre-allocating core scaling calculations...
+                        <div id="engine-log-console" class="text-[10px] font-mono text-zinc-500 max-w-xs text-center h-8">
+                            Awaiting camera sensor frame arrays step...
                         </div>
                     </div>
                 </div>
 
-                <!-- Asset Export Download Zone Container Component -->
-                <div id="download-zone" class="hidden bg-emerald-950/40 border border-emerald-500/20 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-xl">
+                <!-- Export Framework Local Write Download Component -->
+                <div id="export-action-bar" class="hidden bg-zinc-900 border border-zinc-800 p-4 rounded-3xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-xl">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl bg-emerald-500/20 p-2 rounded-xl text-emerald-400">✅</span>
+                        <span class="text-xl bg-zinc-800 p-2.5 rounded-xl text-white">✓</span>
                         <div>
-                            <p class="font-bold text-sm text-white">LUMO Calibration Matrix Finished</p>
-                            <p class="text-[11px] text-emerald-400/80 font-mono" id="output-meta">Matrix Output Ready for Local Write</p>
+                            <p class="font-medium text-xs text-white">Photonic Texture Assembly Complete</p>
+                            <p class="text-[11px] text-zinc-500 font-mono mt-0.5" id="export-dimension-label">Target asset data formatted</p>
                         </div>
                     </div>
-                    <button id="download-btn" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 px-5 rounded-xl transition-all font-mono text-xs uppercase tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10">
-                        <span>📥</span> Export PNG Asset
+                    <button id="export-download-btn" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-zinc-950 font-semibold py-2.5 px-5 rounded-xl transition-colors text-xs tracking-wide">
+                        Save ProRAW Image
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Processing Engine Script Block -->
+    <!-- Processing Pipeline Engine Initialization Script Architecture -->
     <script>
-        const imageInput = document.getElementById('image-input');
-        const fileTitle = document.getElementById('file-title');
-        const fileInfo = document.getElementById('file-info');
-        const executeBtn = document.getElementById('execute-btn');
-        const previewPlaceholder = document.getElementById('preview-placeholder');
-        const previewContainer = document.getElementById('preview-container');
-        const imagePreview = document.getElementById('image-preview');
-        const dimensionReadout = document.getElementById('dimension-readout');
+        const assetFileInput = document.getElementById('asset-file-input');
+        const uploadLabel = document.getElementById('upload-label');
+        const processTrigger = document.getElementById('process-trigger');
+        const nullState = document.getElementById('null-state');
+        const renderPreviewWrapper = document.getElementById('render-preview-wrapper');
+        const renderOutputPreview = document.getElementById('render-output-preview');
+        const readoutMetricsPanel = document.getElementById('readout-metrics-panel');
         
-        const tonalitySlider = document.getElementById('tonality');
-        const tonalityVal = document.getElementById('tonality-val');
-        const claritySlider = document.getElementById('clarity');
-        const clarityVal = document.getElementById('clarity-val');
-        const targetScaleSelect = document.getElementById('target-scale');
-        const lumoToggle = document.getElementById('lumo-toggle');
+        const resolutionTier = document.getElementById('resolution-tier');
+        const deepFusionToggle = document.getElementById('deep-fusion-toggle');
+        const styleSelectorMatrix = document.getElementById('style-selector-matrix');
 
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const statusHeading = document.getElementById('status-heading');
-        const progressBar = document.getElementById('progress-bar');
-        const statusLog = document.getElementById('status-log');
+        const engineLoaderOverlay = document.getElementById('engine-loader-overlay');
+        const engineStatusHeader = document.getElementById('engine-status-header');
+        const engineProgressIndicator = document.getElementById('engine-progress-indicator');
+        const engineLogConsole = document.getElementById('engine-log-console');
 
-        const downloadZone = document.getElementById('download-zone');
-        const downloadBtn = document.getElementById('download-btn');
-        const outputMeta = document.getElementById('output-meta');
+        const exportActionBar = document.getElementById('export-action-bar');
+        const exportDownloadBtn = document.getElementById('export-download-btn');
+        const exportDimensionLabel = document.getElementById('export-dimension-label');
 
-        let originalImageAsset = null;
-        let generatedBlobUrl = null;
+        let rawSourceImagePayload = null;
+        let generatedAssetBlobUrl = null;
+        let selectedStylePreset = 'standard';
 
-        // Dynamic Configuration State Readout Updates
-        tonalitySlider.addEventListener('input', (e) => {
-            const val = parseInt(e.target.value);
-            tonalityVal.textContent = val < 8 ? "Soft True" : val > 22 ? "Vivid HDR" : "Natural";
+        // Photographic Style Toggle Action Interactivity
+        styleSelectorMatrix.addEventListener('click', (e) => {
+            const chosenBtn = e.target.closest('button');
+            if (!chosenBtn) return;
+            
+            styleSelectorMatrix.querySelectorAll('button').forEach(btn => {
+                btn.className = "style-btn px-3 py-2 bg-zinc-800 text-zinc-300 text-xs rounded-xl transition-all border border-zinc-700 hover:border-zinc-500";
+            });
+
+            chosenBtn.className = "style-btn active px-3 py-2 bg-white text-black font-medium text-xs rounded-xl transition-all border border-transparent";
+            selectedStylePreset = chosenBtn.getAttribute('data-style');
         });
-        
-        claritySlider.addEventListener('input', (e) => {
-            const val = parseInt(e.target.value);
-            clarityVal.textContent = val < 10 ? "Soft Look" : val > 28 ? "Ultra Crisp" : "Balanced";
-        });
 
-        // Load asset payload structure into memory
-        imageInput.addEventListener('change', function(e) {
-            const uploadedFile = e.target.files[0];
-            if (!uploadedFile) return;
+        // Load asset into local RAM frame
+        assetFileInput.addEventListener('change', function(e) {
+            const rawFile = e.target.files[0];
+            if (!rawFile) return;
 
-            fileTitle.textContent = uploadedFile.name;
-            fileInfo.textContent = `Payload Size: ${(uploadedFile.size / (1024 * 1024)).toFixed(2)} Megabytes`;
+            uploadLabel.textContent = rawFile.name;
 
-            const filePayloadReader = new FileReader();
-            filePayloadReader.onload = function(event) {
-                const imgElement = new Image();
-                imgElement.onload = function() {
-                    originalImageAsset = imgElement;
-                    imagePreview.src = event.target.result;
+            const trackingFileReader = new FileReader();
+            trackingFileReader.onload = function(evt) {
+                const imgFrame = new Image();
+                imgFrame.onload = function() {
+                    rawSourceImagePayload = imgFrame;
+                    renderOutputPreview.src = evt.target.result;
                     
-                    previewPlaceholder.classList.add('hidden');
-                    previewContainer.classList.remove('hidden');
-                    downloadZone.classList.add('hidden'); 
+                    nullState.classList.add('hidden');
+                    renderPreviewWrapper.classList.remove('hidden');
+                    exportActionBar.classList.add('hidden');
                     
-                    dimensionReadout.textContent = `Source Dimensions: ${imgElement.width} × ${imgElement.height} px | Base Array: ${(imgElement.width * imgElement.height / 1000000).toFixed(1)} MP`;
+                    readoutMetricsPanel.textContent = `Sensor File Native Bounds: ${imgFrame.width} × ${imgFrame.height} | Frame Array: ${(imgFrame.width * imgFrame.height / 1000000).toFixed(1)} Megapixels`;
                     
-                    // Unlock engine activation trigger
-                    executeBtn.removeAttribute('disabled');
-                    executeBtn.className = "w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 px-4 rounded-xl font-mono tracking-wide text-xs uppercase cursor-pointer transition-all flex justify-center items-center gap-2 shadow-lg shadow-emerald-500/10";
+                    processTrigger.removeAttribute('disabled');
+                    processTrigger.className = "w-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold py-3 px-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer transition-all flex justify-center items-center gap-2 shadow-xl";
                 };
-                imgElement.src = event.target.result;
+                imgFrame.src = evt.target.result;
             };
-            filePayloadReader.readAsDataURL(uploadedFile);
+            trackingFileReader.readAsDataURL(rawFile);
         });
 
-        // Main Computational Engine Simulation and Processing Loop
-        executeBtn.addEventListener('click', async () => {
-            if (!originalImageAsset) return;
+        // Photonic Engine Simulation Computational Matrix Execution Pipeline Loop
+        processTrigger.addEventListener('click', async () => {
+            if (!rawSourceImagePayload) return;
 
-            loadingOverlay.classList.remove('hidden');
-            downloadZone.classList.add('hidden');
+            engineLoaderOverlay.classList.remove('hidden');
+            exportActionBar.classList.add('hidden');
 
-            const scaleTargetKey = targetScaleSelect.value;
-            const outputMatrixRes = {
+            const selectedResTierKey = resolutionTier.value;
+            const profileDimensionsMap = {
                 '4k': { w: 3840, h: 2160 },
                 '8k': { w: 7680, h: 4320 },
                 '16k': { w: 15360, h: 8640 }
-            }[scaleTargetKey];
+            }[selectedResTierKey];
             
-            const pipelineStatusUpdate = (title, logs, completePercentage, runtimeWait) => {
+            const writeConsoleStep = (header, systemsLog, percentage, duration) => {
                 return new Promise(res => setTimeout(() => {
-                    statusHeading.textContent = title;
-                    statusLog.textContent = logs;
-                    progressBar.style.width = `${completePercentage}%`;
+                    engineStatusHeader.textContent = header;
+                    engineLogConsole.textContent = systemsLog;
+                    engineProgressIndicator.style.width = `${percentage}%`;
                     res();
-                }, runtimeWait));
+                }, duration));
             };
 
-            // Stage UI Emulations mimicking OnePlus firmware algorithms
-            await pipelineStatusUpdate("Engaging LUMO Color Pipeline...", "Spawning 16-bit photon arrays...", 12, 500);
-            await pipelineStatusUpdate("Mapping Local Tone Matrices...", "Isolating structural shadow coordinates...", 38, 600);
-            
-            if(lumoToggle.checked) {
-                await pipelineStatusUpdate("Applying Eye-Perception Filters...", "Equalizing transitions to block artificial sharpening artifacts...", 65, 800);
-            } else {
-                await pipelineStatusUpdate("Applying Linear Matrix Scaling...", "Interpolating raw color coordinate structures...", 65, 400);
-            }
+            await writeConsoleStep("Triggering Bracket Sequences...", "Capturing sub-pixel exposure metadata details...", 15, 450);
+            await writeConsoleStep("Running Deep Fusion Arrays...", "Analyzing low-light geometric structural coordinates...", 40, 700);
+            await writeConsoleStep("Photonic Engine Reconstruction...", "Evaluating linear RAW sensor layout coordinates...", 70, 800);
 
             try {
-                let renderingWidth = outputMatrixRes.w;
-                let renderingHeight = outputMatrixRes.h;
+                let pipelineWidthTarget = profileDimensionsMap.w;
+                let pipelineHeightTarget = profileDimensionsMap.h;
                 
-                const ratioAspect = originalImageAsset.width / originalImageAsset.height;
-                const matrixAspectTarget = renderingWidth / renderingHeight;
+                const sensorAspectRatio = rawSourceImagePayload.width / rawSourceImagePayload.height;
+                const canvasProfileRatio = pipelineWidthTarget / pipelineHeightTarget;
 
-                if (ratioAspect > matrixAspectTarget) {
-                    renderingHeight = Math.round(renderingWidth / ratioAspect);
+                if (sensorAspectRatio > canvasProfileRatio) {
+                    pipelineHeightTarget = Math.round(pipelineWidthTarget / sensorAspectRatio);
                 } else {
-                    renderingWidth = Math.round(renderingHeight * ratioAspect);
+                    pipelineWidthTarget = Math.round(pipelineHeightTarget * sensorAspectRatio);
                 }
 
-                // Construct processing canvas space allocation
-                const runtimeCanvas = document.createElement('canvas');
-                runtimeCanvas.width = renderingWidth;
-                runtimeCanvas.height = renderingHeight;
-                const executionContext = runtimeCanvas.getContext('2d');
+                const executionCanvasSpace = document.createElement('canvas');
+                executionCanvasSpace.width = pipelineWidthTarget;
+                executionCanvasSpace.height = pipelineHeightTarget;
+                const processingRenderContext = executionCanvasSpace.getContext('2d');
 
-                if (!executionContext) throw new Error("Unified hardware context initialization error.");
+                if (!processingRenderContext) throw new Error("Could not initialize independent spatial GPU pipeline context.");
 
-                // Configure browser rendering interpolation vectors
-                executionContext.imageSmoothingEnabled = true;
-                executionContext.imageSmoothingQuality = 'high';
+                processingRenderContext.imageSmoothingEnabled = true;
+                processingRenderContext.imageSmoothingQuality = 'high';
 
-                // Formulate target filter array based on user parameters
-                const modifierToneValue = 100 + parseInt(tonalitySlider.value);
-                const modifierClarityValue = 100 + (parseInt(claritySlider.value) / 2);
+                // Setup specific photographic styles filtering layers configurations
+                let dynamicFilterStringStyle = "brightness(100%) ";
                 
-                if (lumoToggle.checked) {
-                    // LUMO Engineering Preset: Soft natural transitions, limited harsh boost overlays
-                    executionContext.filter = `contrast(${modifierToneValue - 5}%) saturate(101%) brightness(100%) contrast(${modifierClarityValue - 4}%)`;
-                } else {
-                    // Basic Standard Aggressive Processing Formula
-                    executionContext.filter = `contrast(${modifierToneValue + 10}%) saturate(115%) contrast(${modifierClarityValue + 15}%)`;
+                switch (selectedStylePreset) {
+                    case 'rich-contrast':
+                        dynamicFilterStringStyle += "contrast(122%) saturate(96%) brightness(97%)";
+                        break;
+                    case 'vibrant':
+                        dynamicFilterStringStyle += "saturate(132%) contrast(106%) brightness(101%)";
+                        break;
+                    case 'warm':
+                        dynamicFilterStringStyle += "sepia(14%) saturate(108%) contrast(102%)";
+                        break;
+                    case 'standard':
+                    default:
+                        dynamicFilterStringStyle += "contrast(106%) saturate(103%)";
+                        break;
                 }
 
-                // Render scaled output frame data
-                executionContext.drawImage(originalImageAsset, 0, 0, renderingWidth, renderingHeight);
+                // If Deep Fusion is active, balance the dynamic ranges to stop clipping highlights
+                if (deepFusionToggle.checked) {
+                    dynamicFilterStringStyle += " contrast(96%) brightness(102%) contrast(105%)";
+                }
 
-                await pipelineStatusUpdate("Finalizing Structural Quantization...", "Compressing layout matrices into target container format...", 90, 400);
+                processingRenderContext.filter = dynamicFilterStringStyle;
+                processingRenderContext.drawImage(rawSourceImagePayload, 0, 0, pipelineWidthTarget, pipelineHeightTarget);
 
-                // Export processing data to output download file block binary blob
-                runtimeCanvas.toBlob((fileBlobData) => {
-                    if (!fileBlobData) {
-                        alert("VRAM Boundary Exceeded. Browser thread failed to allocate full 16K image container array blocks.");
-                        loadingOverlay.classList.add('hidden');
+                await writeConsoleStep("Assembling Semantic Segments...", "Formatting target structural image canvas wrappers...", 92, 350);
+
+                executionCanvasSpace.toBlob((fileAssetOutputBlob) => {
+                    if (!fileAssetOutputBlob) {
+                        alert("VRAM Memory Limit Reached. The browser runtime could not reserve the required pixel block array space for a 16K image export.");
+                        engineLoaderOverlay.classList.add('hidden');
                         return;
                     }
 
-                    if (generatedBlobUrl) URL.revokeObjectURL(generatedBlobUrl);
-                    generatedBlobUrl = URL.createObjectURL(fileBlobData);
+                    if (generatedAssetBlobUrl) URL.revokeObjectURL(generatedAssetBlobUrl);
+                    generatedAssetBlobUrl = URL.createObjectURL(fileAssetOutputBlob);
                     
-                    outputMeta.textContent = `Calibrated Output: ${renderingWidth} × ${renderingHeight} px (${(renderingWidth * renderingHeight / 1000000).toFixed(1)} Megapixels)`;
+                    exportDimensionLabel.textContent = `ProRAW Dynamic Bounds: ${pipelineWidthTarget} × ${pipelineHeightTarget} px (${(pipelineWidthTarget * pipelineHeightTarget / 1000000).toFixed(1)} MP)`;
                     
-                    loadingOverlay.classList.add('hidden');
-                    downloadZone.classList.remove('hidden');
+                    engineLoaderOverlay.classList.add('hidden');
+                    exportActionBar.classList.remove('hidden');
                 }, 'image/png');
 
-            } catch (runtimeError) {
-                console.error(runtimeError);
-                alert("Matrix execution failure within scaling arrays: " + runtimeError.message);
-                loadingOverlay.classList.add('hidden');
+            } catch (pipelineErr) {
+                console.error(pipelineErr);
+                alert("Computational system pipeline architecture failure: " + pipelineErr.message);
+                engineLoaderOverlay.classList.add('hidden');
             }
         });
 
-        // Trigger safe file downloading steps
-        downloadBtn.addEventListener('click', () => {
-            if (!generatedBlobUrl) return;
-            const executionDownloadTrigger = document.createElement('a');
-            executionDownloadTrigger.href = generatedBlobUrl;
-            executionDownloadTrigger.download = `LUMO_TrueNatural_HD_${targetScaleSelect.value.toUpperCase()}.png`;
-            document.body.appendChild(executionDownloadTrigger);
-            executionDownloadTrigger.click();
-            document.body.removeChild(executionDownloadTrigger);
+        // Handle structural file saving local downloads
+        exportDownloadBtn.addEventListener('click', () => {
+            if (!generatedAssetBlobUrl) return;
+            const clickTriggerLink = document.createElement('a');
+            clickTriggerLink.href = generatedAssetBlobUrl;
+            clickTriggerLink.download = `PhotonicEngine_ProRAW_${resolutionTier.value.toUpperCase()}.png`;
+            document.body.appendChild(clickTriggerLink);
+            clickTriggerLink.click();
+            document.body.removeChild(clickTriggerLink);
         });
     </script>
 </body>
 </html>
+
+
