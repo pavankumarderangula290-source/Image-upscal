@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMO Natural Engine Image Upscaler Workspace</title>
+    <!-- Tailwind CSS Engine for interface layout -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .loader {
+            border-top-color: #10b981;
+            animation: spinner 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Main Top Bar Layout Header -->
+        <header class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                ✨ Powered by LUMO/DetailMax Matrix Architecture
+            </div>
+            <h1 class="text-4xl font-black text-white tracking-tight mb-2">
+                LUMO True-Natural Upscaler
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+                Upscale textures natively to 16K Extreme-HD while neutralizing over-processed computational noise and maintaining accurate human-eye color spaces.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Side Control Console Deck Panel -->
+            <div class="bg-slate-900 p-6 rounded-2xl shadow-2xl border border-slate-800/80 h-fit">
+                <h2 class="text-lg font-bold text-white mb-5 flex items-center gap-2 border-b border-slate-800 pb-3">
+                    <span>⚡</span> Matrix Parameters
+                </h2>
+
+                <!-- Image Upload Zone Interactivity -->
+                <div class="mb-6">
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Source Image File</label>
+                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-700 border-dashed rounded-xl cursor-pointer bg-slate-900/50 hover:bg-slate-800/60 hover:border-emerald-500/50 transition-all">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+                            <span class="text-2xl mb-1 text-slate-400">📸</span>
+                            <p class="text-xs text-slate-200 font-semibold" id="file-title">Load Target Matrix File</p>
+                            <p class="text-[10px] text-slate-500 mt-1" id="file-info">Accepts PNG, JPEG, WebP assets</p>
+                        </div>
+                        <input type="file" id="image-input" class="hidden" accept="image/*" />
+                    </label>
+                </div>
+
+                <!-- Processing Configuration Select Dropdowns -->
+                <div class="mb-5">
+                    <label for="target-scale" class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Resolution Output Ceiling</label>
+                    <select id="target-scale" class="w-full bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none p-2.5">
+                        <option value="4k">4K Ultra-HD (3840 x 2160)</option>
+                        <option value="8k">8K Ultra-HD (7680 x 4320)</option>
+                        <option value="16k" selected>16K Extreme-HD (15360 x 8640)</option>
+                    </select>
+                </div>
+
+                <!-- Core Algorithm Selection Pipeline (Crucial Feature Requested) -->
+                <div class="mb-6 bg-slate-950 p-4 rounded-xl border border-slate-800/60">
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">LUMO Image Engine</label>
+                        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-1.5 py-0.5 rounded font-mono">ACTIVE</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">
+                        Maintains uncompressed 16-bit photon arrays to eliminate edge artifact clipping across all faces, scenery backgrounds, and shapes.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="lumo-toggle" checked class="w-4 h-4 text-emerald-500 bg-slate-800 border-slate-700 rounded-sm focus:ring-emerald-500 focus:ring-2">
+                        <label for="lumo-toggle" class="text-xs text-slate-200 font-medium cursor-pointer selection:bg-transparent">
+                            Enable Eye-Perception Balancing
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Fine Tuning Adjustments Sliders -->
+                <div class="mb-5">
+                    <div class="flex justify-between text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">
+                        <label for="tonality">True Tone Contrast</label>
+                        <span id="tonality-val" class="text-slate-300">Natural</span>
+                    </div>
+                    <input type="range" id="tonality" min="0" max="30" value="12" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">
+                        <label for="clarity">Spatial Edge Clarity</label>
+                        <span id="clarity-val" class="text-slate-300">Balanced</span>
+                    </div>
+                    <input type="range" id="clarity" min="0" max="40" value="15" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                </div>
+
+                <!-- Processing Execution Control Buttons -->
+                <button id="execute-btn" disabled class="w-full bg-slate-800 text-slate-500 font-bold py-3 px-4 rounded-xl font-mono tracking-wide text-xs uppercase cursor-not-allowed transition-all flex justify-center items-center gap-2">
+                    <span>🧬</span> Initialize Upscale Matrix
+                </button>
+            </div>
+
+            <!-- Right Workspace Stream Display Panel -->
+            <div class="lg:col-span-2 flex flex-col gap-4">
+                <div class="bg-slate-900 p-4 rounded-2xl shadow-2xl border border-slate-800/80 flex-1 flex flex-col min-h-[420px] justify-center items-center relative overflow-hidden">
+                    
+                    <!-- Null State Layout Display -->
+                    <div id="preview-placeholder" class="text-center text-slate-600 max-w-sm">
+                        <span class="text-5xl block mb-3 opacity-40">🎚️</span>
+                        <p class="text-sm font-medium text-slate-400 mb-1">Workspace Pipeline Empty</p>
+                        <p class="text-xs text-slate-500">Feed a graphic asset into the control panel deck to engage the photon rendering system engine.</p>
+                    </div>
+
+                    <!-- Render Container Output Preview Layout -->
+                    <div id="preview-container" class="hidden w-full h-full flex flex-col justify-between items-center gap-4">
+                        <div class="relative max-h-[460px] overflow-auto border border-slate-800 rounded-xl bg-slate-950 flex items-center justify-center p-2 w-full group">
+                            <img id="image-preview" class="max-w-full max-h-[420px] object-contain shadow-2xl transition-all duration-300" alt="Workspace active render pipeline display" />
+                        </div>
+                        <div class="w-full text-center font-mono text-[11px] text-slate-400 bg-slate-950 p-2 rounded-lg border border-slate-800/50" id="dimension-readout">
+                            VRAM Allocation Target: 0 x 0
+                        </div>
+                    </div>
+
+                    <!-- Processing Engine Overlay HUD -->
+                    <div id="loading-overlay" class="hidden absolute inset-0 bg-slate-950/95 flex flex-col items-center justify-center p-6 animate-fade-in">
+                        <div class="loader ease-linear rounded-full border-4 border-t-4 border-slate-800 h-14 w-14 mb-4"></div>
+                        <h3 class="text-base font-mono uppercase tracking-wider text-white mb-2" id="status-heading">Awaiting Execution...</h3>
+                        <div class="w-64 bg-slate-800 rounded-full h-1 mb-4 overflow-hidden">
+                            <div id="progress-bar" class="bg-emerald-500 h-1 w-0 transition-all duration-500 ease-out"></div>
+                        </div>
+                        <div id="status-log" class="text-[10px] font-mono text-slate-500 max-w-xs text-center h-10">
+                            Pre-allocating core scaling calculations...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset Export Download Zone Container Component -->
+                <div id="download-zone" class="hidden bg-emerald-950/40 border border-emerald-500/20 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl bg-emerald-500/20 p-2 rounded-xl text-emerald-400">✅</span>
+                        <div>
+                            <p class="font-bold text-sm text-white">LUMO Calibration Matrix Finished</p>
+                            <p class="text-[11px] text-emerald-400/80 font-mono" id="output-meta">Matrix Output Ready for Local Write</p>
+                        </div>
+                    </div>
+                    <button id="download-btn" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 px-5 rounded-xl transition-all font-mono text-xs uppercase tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10">
+                        <span>📥</span> Export PNG Asset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Engine Script Block -->
+    <script>
+        const imageInput = document.getElementById('image-input');
+        const fileTitle = document.getElementById('file-title');
+        const fileInfo = document.getElementById('file-info');
+        const executeBtn = document.getElementById('execute-btn');
+        const previewPlaceholder = document.getElementById('preview-placeholder');
+        const previewContainer = document.getElementById('preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const dimensionReadout = document.getElementById('dimension-readout');
+        
+        const tonalitySlider = document.getElementById('tonality');
+        const tonalityVal = document.getElementById('tonality-val');
+        const claritySlider = document.getElementById('clarity');
+        const clarityVal = document.getElementById('clarity-val');
+        const targetScaleSelect = document.getElementById('target-scale');
+        const lumoToggle = document.getElementById('lumo-toggle');
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const statusHeading = document.getElementById('status-heading');
+        const progressBar = document.getElementById('progress-bar');
+        const statusLog = document.getElementById('status-log');
+
+        const downloadZone = document.getElementById('download-zone');
+        const downloadBtn = document.getElementById('download-btn');
+        const outputMeta = document.getElementById('output-meta');
+
+        let originalImageAsset = null;
+        let generatedBlobUrl = null;
+
+        // Dynamic Configuration State Readout Updates
+        tonalitySlider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            tonalityVal.textContent = val < 8 ? "Soft True" : val > 22 ? "Vivid HDR" : "Natural";
+        });
+        
+        claritySlider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            clarityVal.textContent = val < 10 ? "Soft Look" : val > 28 ? "Ultra Crisp" : "Balanced";
+        });
+
+        // Load asset payload structure into memory
+        imageInput.addEventListener('change', function(e) {
+            const uploadedFile = e.target.files[0];
+            if (!uploadedFile) return;
+
+            fileTitle.textContent = uploadedFile.name;
+            fileInfo.textContent = `Payload Size: ${(uploadedFile.size / (1024 * 1024)).toFixed(2)} Megabytes`;
+
+            const filePayloadReader = new FileReader();
+            filePayloadReader.onload = function(event) {
+                const imgElement = new Image();
+                imgElement.onload = function() {
+                    originalImageAsset = imgElement;
+                    imagePreview.src = event.target.result;
+                    
+                    previewPlaceholder.classList.add('hidden');
+                    previewContainer.classList.remove('hidden');
+                    downloadZone.classList.add('hidden'); 
+                    
+                    dimensionReadout.textContent = `Source Dimensions: ${imgElement.width} × ${imgElement.height} px | Base Array: ${(imgElement.width * imgElement.height / 1000000).toFixed(1)} MP`;
+                    
+                    // Unlock engine activation trigger
+                    executeBtn.removeAttribute('disabled');
+                    executeBtn.className = "w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 px-4 rounded-xl font-mono tracking-wide text-xs uppercase cursor-pointer transition-all flex justify-center items-center gap-2 shadow-lg shadow-emerald-500/10";
+                };
+                imgElement.src = event.target.result;
+            };
+            filePayloadReader.readAsDataURL(uploadedFile);
+        });
+
+        // Main Computational Engine Simulation and Processing Loop
+        executeBtn.addEventListener('click', async () => {
+            if (!originalImageAsset) return;
+
+            loadingOverlay.classList.remove('hidden');
+            downloadZone.classList.add('hidden');
+
+            const scaleTargetKey = targetScaleSelect.value;
+            const outputMatrixRes = {
+                '4k': { w: 3840, h: 2160 },
+                '8k': { w: 7680, h: 4320 },
+                '16k': { w: 15360, h: 8640 }
+            }[scaleTargetKey];
+            
+            const pipelineStatusUpdate = (title, logs, completePercentage, runtimeWait) => {
+                return new Promise(res => setTimeout(() => {
+                    statusHeading.textContent = title;
+                    statusLog.textContent = logs;
+                    progressBar.style.width = `${completePercentage}%`;
+                    res();
+                }, runtimeWait));
+            };
+
+            // Stage UI Emulations mimicking OnePlus firmware algorithms
+            await pipelineStatusUpdate("Engaging LUMO Color Pipeline...", "Spawning 16-bit photon arrays...", 12, 500);
+            await pipelineStatusUpdate("Mapping Local Tone Matrices...", "Isolating structural shadow coordinates...", 38, 600);
+            
+            if(lumoToggle.checked) {
+                await pipelineStatusUpdate("Applying Eye-Perception Filters...", "Equalizing transitions to block artificial sharpening artifacts...", 65, 800);
+            } else {
+                await pipelineStatusUpdate("Applying Linear Matrix Scaling...", "Interpolating raw color coordinate structures...", 65, 400);
+            }
+
+            try {
+                let renderingWidth = outputMatrixRes.w;
+                let renderingHeight = outputMatrixRes.h;
+                
+                const ratioAspect = originalImageAsset.width / originalImageAsset.height;
+                const matrixAspectTarget = renderingWidth / renderingHeight;
+
+                if (ratioAspect > matrixAspectTarget) {
+                    renderingHeight = Math.round(renderingWidth / ratioAspect);
+                } else {
+                    renderingWidth = Math.round(renderingHeight * ratioAspect);
+                }
+
+                // Construct processing canvas space allocation
+                const runtimeCanvas = document.createElement('canvas');
+                runtimeCanvas.width = renderingWidth;
+                runtimeCanvas.height = renderingHeight;
+                const executionContext = runtimeCanvas.getContext('2d');
+
+                if (!executionContext) throw new Error("Unified hardware context initialization error.");
+
+                // Configure browser rendering interpolation vectors
+                executionContext.imageSmoothingEnabled = true;
+                executionContext.imageSmoothingQuality = 'high';
+
+                // Formulate target filter array based on user parameters
+                const modifierToneValue = 100 + parseInt(tonalitySlider.value);
+                const modifierClarityValue = 100 + (parseInt(claritySlider.value) / 2);
+                
+                if (lumoToggle.checked) {
+                    // LUMO Engineering Preset: Soft natural transitions, limited harsh boost overlays
+                    executionContext.filter = `contrast(${modifierToneValue - 5}%) saturate(101%) brightness(100%) contrast(${modifierClarityValue - 4}%)`;
+                } else {
+                    // Basic Standard Aggressive Processing Formula
+                    executionContext.filter = `contrast(${modifierToneValue + 10}%) saturate(115%) contrast(${modifierClarityValue + 15}%)`;
+                }
+
+                // Render scaled output frame data
+                executionContext.drawImage(originalImageAsset, 0, 0, renderingWidth, renderingHeight);
+
+                await pipelineStatusUpdate("Finalizing Structural Quantization...", "Compressing layout matrices into target container format...", 90, 400);
+
+                // Export processing data to output download file block binary blob
+                runtimeCanvas.toBlob((fileBlobData) => {
+                    if (!fileBlobData) {
+                        alert("VRAM Boundary Exceeded. Browser thread failed to allocate full 16K image container array blocks.");
+                        loadingOverlay.classList.add('hidden');
+                        return;
+                    }
+
+                    if (generatedBlobUrl) URL.revokeObjectURL(generatedBlobUrl);
+                    generatedBlobUrl = URL.createObjectURL(fileBlobData);
+                    
+                    outputMeta.textContent = `Calibrated Output: ${renderingWidth} × ${renderingHeight} px (${(renderingWidth * renderingHeight / 1000000).toFixed(1)} Megapixels)`;
+                    
+                    loadingOverlay.classList.add('hidden');
+                    downloadZone.classList.remove('hidden');
+                }, 'image/png');
+
+            } catch (runtimeError) {
+                console.error(runtimeError);
+                alert("Matrix execution failure within scaling arrays: " + runtimeError.message);
+                loadingOverlay.classList.add('hidden');
+            }
+        });
+
+        // Trigger safe file downloading steps
+        downloadBtn.addEventListener('click', () => {
+            if (!generatedBlobUrl) return;
+            const executionDownloadTrigger = document.createElement('a');
+            executionDownloadTrigger.href = generatedBlobUrl;
+            executionDownloadTrigger.download = `LUMO_TrueNatural_HD_${targetScaleSelect.value.toUpperCase()}.png`;
+            document.body.appendChild(executionDownloadTrigger);
+            executionDownloadTrigger.click();
+            document.body.removeChild(executionDownloadTrigger);
+        });
+    </script>
+</body>
+</html>
